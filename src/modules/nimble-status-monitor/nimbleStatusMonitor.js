@@ -17,10 +17,9 @@ const getLastReportedNimbleStatus = () => {
 const trackNimbleStatus = () => {
     axios
         .get(
-            `http://localhost:${configProvider.NIMBLE_MANAGEMENT_PORT}/manage/server_status`,
-            {
-                params: { salt: getNimbleSalt(), hash: getNimbleHash() },
-            }
+            `http://localhost:${
+                configProvider.NIMBLE_MANAGEMENT_PORT
+            }/manage/server_status?salt=${getNimbleSalt()}&hash=${getNimbleHash()}`
         )
         .then((res) => {
             isNimbleResponsive = true

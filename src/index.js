@@ -22,7 +22,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(innerTrunkRouter)
-trackNimbleStatus()
+
 app.listen(configProvider.OBS_LEAVES_INNER_TRUNK_PORT, () => {
     logger.debug(
         'Listenning on port ' + configProvider.OBS_LEAVES_INNER_TRUNK_PORT
