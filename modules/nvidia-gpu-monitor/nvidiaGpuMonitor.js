@@ -3,16 +3,26 @@ const logger = require('../logger/logger')
 
 let lastReadHighestValue
 
-const updateLastReadHighestValue = () => {
+let isGpuPresentCached = null
+const updateGpuUsageLastReadHighestValue = () => {
     lastReadHighestValue = getMaxGpuUsageValue()
 }
+
+const getLastReadHighestValue = () => {
+    return lastReadHighestValue
+}
 const getIsGpuPresent = async () => {
-    try {
-        await getGpuData()
-        return true
-    } catch (err) {
-        return false
+    if (isGpuPresentCached == null) {
+        console.log('no cached data')
+
+        try {
+            await getGpuData()
+            isGpuPresentCached = true
+        } catch (err) {
+            isGpuPresentCached = false
+        }
     }
+    return isGpuPresentCached
 }
 
 const getMaxGpuUsageValue = async () => {
@@ -48,9 +58,9 @@ const getGpuData = () => {
     })
 }
 
-getMaxGpuUsageValue().then((res) => console.log(res))
 module.exports = {
     getIsGpuPresent,
-    updateLastReadHighestValue,
+    updateGpuUsageLastReadHighestValue,
     getMaxGpuUsageValue,
+    getLastReadHighestValue,
 }
