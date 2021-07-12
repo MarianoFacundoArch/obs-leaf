@@ -4,8 +4,8 @@ const logger = require('../logger/logger')
 let lastReadHighestValue
 
 let isGpuPresentCached = null
-const updateGpuUsageLastReadHighestValue = () => {
-    lastReadHighestValue = getMaxGpuUsageValue()
+const updateGpuUsageLastReadHighestValue = async () => {
+    lastReadHighestValue = await getMaxGpuUsageValue()
 }
 
 const getLastReadGpuUsageHighestValue = () => {
