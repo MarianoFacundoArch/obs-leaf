@@ -8,7 +8,7 @@ const updateGpuUsageLastReadHighestValue = () => {
     lastReadHighestValue = getMaxGpuUsageValue()
 }
 
-const getLastReadHighestValue = () => {
+const getLastReadGpuUsageHighestValue = () => {
     return lastReadHighestValue
 }
 const getIsGpuPresent = async () => {
@@ -62,5 +62,5 @@ module.exports = {
     getIsGpuPresent,
     updateGpuUsageLastReadHighestValue,
     getMaxGpuUsageValue,
-    getLastReadHighestValue,
+    getLastReadGpuUsageHighestValue,
 }

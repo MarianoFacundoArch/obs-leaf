@@ -2,6 +2,8 @@ const configProvider = require('./modules/config-provider/configProvider')
 const express = require('express')
 const cors = require('cors')
 const logger = require('./modules/logger/logger')
+
+const innerTrunkRouter = require('./routers/innerTrunkRouter')
 const {
     updateGpuUsageLastReadHighestValue,
 } = require('./modules/nvidia-gpu-monitor/nvidiaGpuMonitor')
@@ -15,7 +17,7 @@ const corsOptions = {
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
-
+app.use(innerTrunkRouter)
 if (configProvider.GPU_MONITOR_ENABLED) {
     getIsGpuPresent().then((result) => {
         if (!result) {
@@ -24,7 +26,6 @@ if (configProvider.GPU_MONITOR_ENABLED) {
             logger.debug('Starting Nvidia graphics card monitor')
             updateGpuUsageLastReadHighestValue()
             setInterval(() => {
-                logger.debug('Updating gpu usage')
                 updateGpuUsageLastReadHighestValue()
             }, configProvider.GPU_MONITOR_INTERVAL_IN_SECONDS * 1000)
         }
