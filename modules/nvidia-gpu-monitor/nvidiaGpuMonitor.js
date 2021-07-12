@@ -48,7 +48,7 @@ const getGpuData = () => {
     })
 }
 
-console.log(getMaxGpuUsageValue)
+getMaxGpuUsageValue().then((res) => console.log(res))
 module.exports = {
     getIsGpuPresent,
     updateLastReadHighestValue,
