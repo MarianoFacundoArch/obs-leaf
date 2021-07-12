@@ -3,7 +3,7 @@ const smi = require('node-nvidia-smi')
 const getIsGpuPresent = async () => {
     try {
         const response = await getGpuData()
-        console.log(response)
+        console.log(response.nvidia_smi_log.gpu.utilization)
     } catch (err) {
         console.log(err)
     }
