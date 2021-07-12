@@ -12,8 +12,6 @@ const getLastReadGpuUsageHighestValue = () => {
 }
 const getIsGpuPresent = async () => {
     if (isGpuPresentCached == null) {
-        console.log('no cached data')
-
         try {
             await getGpuData()
             isGpuPresentCached = true

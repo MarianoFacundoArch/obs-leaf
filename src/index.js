@@ -45,7 +45,17 @@ if (configProvider.GPU_MONITOR_ENABLED) {
 }
 
 //CPU Monitor
-updateLastReadCpuUsage()
-setInterval(() => {
+if (configProvider.CPU_MONITOR_ENABLED) {
     updateLastReadCpuUsage()
-}, configProvider.CPU_MONITOR_INTERVAL_IN_SECONDS * 1000)
+    setInterval(() => {
+        updateLastReadCpuUsage()
+    }, configProvider.CPU_MONITOR_INTERVAL_IN_SECONDS * 1000)
+}
+
+//Nimble Monitor
+if (configProvider.NIMBLE_MONITOR_ENABLED) {
+    trackNimbleStatus()
+    setInterval(() => {
+        trackNimbleStatus()
+    }, configProvider.NIMBLE_MONITOR_INTERVAL_IN_SECONDS * 1000)
+}
