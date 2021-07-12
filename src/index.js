@@ -5,6 +5,10 @@ const logger = require('./modules/logger/logger')
 
 const innerTrunkRouter = require('./routers/innerTrunkRouter')
 const {
+    trackNimbleStatus,
+} = require('./modules/nimble-status-monitor/nimbleStatusMonitor')
+const { updateLastReadCpuUsage } = require('./modules/cpu-monitor/cpuMonitor')
+const {
     updateGpuUsageLastReadHighestValue,
 } = require('./modules/nvidia-gpu-monitor/nvidiaGpuMonitor')
 const {
@@ -18,12 +22,14 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(innerTrunkRouter)
-
+trackNimbleStatus()
 app.listen(configProvider.OBS_LEAVES_INNER_TRUNK_PORT, () => {
     logger.debug(
         'Listenning on port ' + configProvider.OBS_LEAVES_INNER_TRUNK_PORT
     )
 })
+
+//GPU Monitor
 if (configProvider.GPU_MONITOR_ENABLED) {
     getIsGpuPresent().then((result) => {
         if (!result) {
@@ -37,3 +43,9 @@ if (configProvider.GPU_MONITOR_ENABLED) {
         }
     })
 }
+
+//CPU Monitor
+updateLastReadCpuUsage()
+setInterval(() => {
+    updateLastReadCpuUsage()
+}, configProvider.CPU_MONITOR_INTERVAL_IN_SECONDS * 1000)

@@ -1,15 +1,14 @@
 const smi = require('node-nvidia-smi')
 const logger = require('../logger/logger')
 
-let lastReadHighestValue
-
+let lastGpuUtilizationMaxValue
 let isGpuPresentCached = null
 const updateGpuUsageLastReadHighestValue = async () => {
-    lastReadHighestValue = await getMaxGpuUsageValue()
+    lastGpuUtilizationMaxValue = await getMaxGpuUsageValue()
 }
 
 const getLastReadGpuUsageHighestValue = () => {
-    return lastReadHighestValue
+    return lastGpuUtilizationMaxValue
 }
 const getIsGpuPresent = async () => {
     if (isGpuPresentCached == null) {
@@ -41,7 +40,7 @@ const getMaxGpuUsageValue = async () => {
 
         return highestValueSoFar
     } catch (err) {
-        logger.error('Error on getMaxGpuUsageValue: ' + err)
+        logger.error('Error on getMaxGpuUsageValue: ' + err.toString())
         return 100
     }
 }
