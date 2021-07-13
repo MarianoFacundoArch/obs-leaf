@@ -48,7 +48,9 @@ const monitorLocalStreams = async () => {
         }
         localRtmpStreams = [...currentLocalRtmpStreams]
     } catch (err) {
-        logger.error('Error on streamsMonitor - monitorLocalStreams : ' + err)
+        logger.error(
+            'Error on streamsMonitor - monitorLocalStreams : ' + err.toString()
+        )
     }
 }
 

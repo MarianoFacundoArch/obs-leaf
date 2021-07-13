@@ -8,12 +8,6 @@ const {
     monitorLocalStreams,
 } = require('./modules/streams-monitor/streamsMonitor')
 const {
-    getNimbleHash,
-} = require('./modules/nimble-auth-provider/nimbleAuthProvider')
-const {
-    getNimbleSalt,
-} = require('./modules/nimble-auth-provider/nimbleAuthProvider')
-const {
     trackNimbleStatus,
 } = require('./modules/nimble-status-monitor/nimbleStatusMonitor')
 const { updateLastReadCpuUsage } = require('./modules/cpu-monitor/cpuMonitor')
