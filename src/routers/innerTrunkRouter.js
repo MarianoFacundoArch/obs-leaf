@@ -1,5 +1,9 @@
 const express = require('express')
 const protectedEndpointAuth = require('../middleware/protectedEndpointAuth')
+const { getMaxUsageMedition } = require('../utils/getMaxUsageMedition')
+const {
+    evaluateIfServerCanReceiveNewStreams,
+} = require('../utils/evaluateIfServerCanReceiveNewStreams')
 const {
     getLastReportedNimbleStatus,
 } = require('../modules/nimble-status-monitor/nimbleStatusMonitor')
@@ -18,6 +22,8 @@ router.get('/innerTrunk', protectedEndpointAuth, async (req, res) => {
         cpuUsage: getLastReadCpuUsage(),
         isNimbleResponsive: getIsNimbleResponsive(),
         lastReportedNimbleStatus: getLastReportedNimbleStatus(),
+        serverCanReceiveNewStreams: evaluateIfServerCanReceiveNewStreams(),
+        maxUsageMedition: getMaxUsageMedition(),
     })
 })
 
