@@ -4,8 +4,8 @@ const configProvider = require('../config-provider/configProvider')
 const os = require('os')
 const logger = require('../logger/logger')
 const ip = require('ip')
-const {getNimbleSalt} = require("../nimble-auth-provider/nimbleAuthProvider");
-const {getNimbleHash} = require("../nimble-auth-provider/nimbleAuthProvider");
+const { getNimbleSalt } = require('../nimble-auth-provider/nimbleAuthProvider')
+const { getNimbleHash } = require('../nimble-auth-provider/nimbleAuthProvider')
 const {
     getArrayOrArrayWithSingleElementIfNotAnArray,
 } = require('../../utils/getArrayOrArrayWithSingleElementIfNotAnArray')
