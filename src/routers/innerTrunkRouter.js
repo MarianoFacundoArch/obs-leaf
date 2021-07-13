@@ -23,7 +23,7 @@ router.get('/innerTrunk', protectedEndpointAuth, async (req, res) => {
     res.send({
         maxGpuUsage: getLastReadGpuUsageHighestValue(),
         cpuUsage: getLastReadCpuUsage(),
-        hasGpu: getIsGpuPresent(),
+        hasGpu: await getIsGpuPresent(),
         isNimbleResponsive: getIsNimbleResponsive(),
         lastReportedNimbleStatus: getLastReportedNimbleStatus(),
         serverCanReceiveNewStreams: evaluateIfServerCanReceiveNewStreams(),
