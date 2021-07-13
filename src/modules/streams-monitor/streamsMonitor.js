@@ -39,7 +39,7 @@ const monitorLocalStreams = async () => {
                             generateStreamMonitorObjectBasedOnStreamRestData(
                                 currentAppStream,
                                 currentServerIpAddress,
-                                currentApp
+                                currentApp.app
                             )
                         )
                     })
