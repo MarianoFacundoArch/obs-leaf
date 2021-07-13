@@ -74,7 +74,7 @@ const generateStreamMonitorObjectBasedOnStreamRestData = (
         serverName: currentHostname,
         appName: appName,
         rtmpPort: configProvider.STREAM_MONITOR_NIMBLE_RTMP_PORT,
-        startTime: streamRestData.publish_time,
+        startTime: parseInt(streamRestData.publish_time),
         ip: streamRestData.serverIp,
     }
 }
