@@ -5,6 +5,12 @@ const logger = require('./modules/logger/logger')
 
 const innerTrunkRouter = require('./routers/innerTrunkRouter')
 const {
+    getNimbleHash,
+} = require('./modules/nimble-auth-provider/nimbleAuthProvider')
+const {
+    getNimbleSalt,
+} = require('./modules/nimble-auth-provider/nimbleAuthProvider')
+const {
     trackNimbleStatus,
 } = require('./modules/nimble-status-monitor/nimbleStatusMonitor')
 const { updateLastReadCpuUsage } = require('./modules/cpu-monitor/cpuMonitor')
@@ -58,4 +64,13 @@ if (configProvider.NIMBLE_MONITOR_ENABLED) {
     setInterval(() => {
         trackNimbleStatus()
     }, configProvider.NIMBLE_MONITOR_INTERVAL_IN_SECONDS * 1000)
+}
+
+// Nimble stream monitor
+
+if (configProvider.STREAM_MONITOR_ENABLED) {
+    monitorLocalStreams()
+    setInterval(() => {
+        monitorLocalStreams()
+    }, configProvider.STREAM_MONITOR_INTERVAL_IN_SECONDS * 1000)
 }

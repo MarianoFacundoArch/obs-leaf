@@ -19,7 +19,10 @@ const trackNimbleStatus = () => {
         .get(
             `http://localhost:${
                 configProvider.NIMBLE_MANAGEMENT_PORT
-            }/manage/server_status?salt=${getNimbleSalt()}&hash=${getNimbleHash()}`
+            }/manage/server_status?salt=${getNimbleSalt()}&hash=${getNimbleHash()}`,
+            {
+                timeout: configProvider.NIMBLE_REQUEST_TIMEOUT_IN_MILLISECONDS,
+            }
         )
         .then((res) => {
             isNimbleResponsive = true

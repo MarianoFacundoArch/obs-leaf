@@ -17,6 +17,9 @@ const {
 const router = express.Router()
 const configProvider = require('../modules/config-provider/configProvider')
 const {
+    getLocalRtmpStreams,
+} = require('../modules/streams-monitor/streamsMonitor')
+const {
     getIsGpuPresent,
 } = require('../modules/nvidia-gpu-monitor/nvidiaGpuMonitor')
 router.get('/innerTrunk', protectedEndpointAuth, async (req, res) => {
@@ -30,6 +33,8 @@ router.get('/innerTrunk', protectedEndpointAuth, async (req, res) => {
         maxUsageMedition: getMaxUsageMedition(),
         serverTags: configProvider.SERVER_TAGS,
         isBackupServer: configProvider.IS_BACKUP_SERVER,
+        streamMonitor: getLocalRtmpStreams(),
+        streamsInCurrentServer: getLocalRtmpStreams().length,
     })
 })
 
