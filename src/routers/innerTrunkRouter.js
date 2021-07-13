@@ -15,15 +15,21 @@ const {
     getLastReadGpuUsageHighestValue,
 } = require('../modules/nvidia-gpu-monitor/nvidiaGpuMonitor')
 const router = express.Router()
-
+const configProvider = require('../modules/config-provider/configProvider')
+const {
+    getIsGpuPresent,
+} = require('../modules/nvidia-gpu-monitor/nvidiaGpuMonitor')
 router.get('/innerTrunk', protectedEndpointAuth, async (req, res) => {
     res.send({
         maxGpuUsage: getLastReadGpuUsageHighestValue(),
         cpuUsage: getLastReadCpuUsage(),
+        hasGpu: getIsGpuPresent(),
         isNimbleResponsive: getIsNimbleResponsive(),
         lastReportedNimbleStatus: getLastReportedNimbleStatus(),
         serverCanReceiveNewStreams: evaluateIfServerCanReceiveNewStreams(),
         maxUsageMedition: getMaxUsageMedition(),
+        serverTags: configProvider.SERVER_TAGS,
+        isBackupServer: configProvider.IS_BACKUP_SERVER,
     })
 })
 
