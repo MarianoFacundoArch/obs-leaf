@@ -4,7 +4,9 @@ const cors = require('cors')
 const logger = require('./modules/logger/logger')
 
 const innerTrunkRouter = require('./routers/innerTrunkRouter')
-const {monitorLocalStreams} = require("./modules/streams-monitor/streamsMonitor");
+const {
+    monitorLocalStreams,
+} = require('./modules/streams-monitor/streamsMonitor')
 const {
     getNimbleHash,
 } = require('./modules/nimble-auth-provider/nimbleAuthProvider')
